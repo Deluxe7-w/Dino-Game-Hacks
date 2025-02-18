@@ -19,7 +19,10 @@ ____________________________________
 
 |________________________________|
 
+(use the "inspect Elements" Console to use these hacks)
 
+
+|||Hit, ctrl-shift-i | Then pase the copied code into the cosole|||
 
 _______________________________________________
 PLEASE USE THE CORRECTLY AND NOT THE WRONG WAY!
