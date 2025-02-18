@@ -1,0 +1,29 @@
+(function() {
+  // 1. Revert the Dino to normal (disable invincibility)
+  Runner.prototype.gameOver = function() {
+    // Restore the original game over functionality
+    Runner.prototype.gameOver = originalGame;
+    console.log('Game over functionality restored!');
+  };
+
+  // 2. Revert the score text to normal (remove rainbow effect)
+  Runner.prototype.drawScore = function() {
+    originalDrawScore.apply(this, arguments);
+    const scoreElem = document.querySelector('.score-container');
+    if (scoreElem) {
+      const scoreText = scoreElem.querySelector('span');
+      if (scoreText) {
+        scoreText.style.color = ''; // Reset to default color
+      }
+    }
+  };
+
+  // 3. Revert the Dino sprite to original (remove Mario sprite)
+  const dinoCanvas = document.querySelector('.runner-canvas');
+  if (dinoCanvas) {
+    dinoCanvas.style.backgroundImage = ''; // Remove Mario sprite
+    dinoCanvas.style.backgroundSize = ''; // Reset background size
+  }
+
+  console.log('Dino game reverted: Invincibility, Rainbow Score, and Mario Sprite disabled.');
+})();
