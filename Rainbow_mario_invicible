@@ -1,0 +1,41 @@
+(function() {
+  // 1. Make the Dino invincible
+  const originalGame = Runner.prototype.gameOver;
+  Runner.prototype.gameOver = function() {}; // Disable the game over functionality
+
+  // 2. Change the score text to rainbow
+  const originalDrawScore = Runner.prototype.drawScore;
+  Runner.prototype.drawScore = function() {
+    originalDrawScore.apply(this, arguments);
+    const scoreElem = document.querySelector('.score-container');
+    if (scoreElem) {
+      const scoreText = scoreElem.querySelector('span');
+      if (scoreText) {
+        let colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
+        let colorIndex = 0;
+        setInterval(() => {
+          scoreText.style.color = colors[colorIndex % colors.length];
+          colorIndex++;
+        }, 500); // Change every 500ms
+      }
+    }
+  };
+
+  // 3. Turn the Dino into Mario
+  const marioImageUrl = 'https://example.com/path/to/mario-sprite.png'; // Replace with a real Mario sprite URL
+  const originalDraw = Runner.prototype.draw;
+  Runner.prototype.draw = function() {
+    originalDraw.apply(this, arguments);
+    const dino = document.querySelector('.runner-canvas');
+    if (dino) {
+      const marioSprite = new Image();
+      marioSprite.src = marioImageUrl;
+      marioSprite.onload = function() {
+        dino.style.backgroundImage = `url(${marioSprite.src})`;
+        dino.style.backgroundSize = 'contain';
+      };
+    }
+  };
+
+  console.log('Dino game modified: Invincible Dino, Rainbow Score, and Mario Sprite!');
+})();
